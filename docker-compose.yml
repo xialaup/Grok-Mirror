@@ -6,8 +6,6 @@ services:
     restart: always
     volumes:
       - ./.cache_data:/app/.cache_data
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     env_file:
       - .env
       
@@ -17,13 +15,3 @@ services:
       - gateway
     environment:
       - GATEWAY_URL=http://gateway:8080
-
-
-  watchtower:
-    image: containrrr/watchtower
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup --interval 3600 --label-enable
-
-
